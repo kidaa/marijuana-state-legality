@@ -23,8 +23,8 @@ optparse.parse!
 
 states = Hash.new{ |h,k| h[k] = Hash.new(&h.default_proc) }
 
-stop = File.readlines('stopwords').map{|element| element.gsub(/\n/,'')}
-f = File.readlines("#{options[:drug]}_geo.txt")
+stop = File.readlines('./data/stopwords').map{|element| element.gsub(/\n/,'')}
+f = File.readlines("./data/#{options[:drug]}_geo.txt")
 f.each do |line|
   line = line.split(' | ')
   st = line[0]
@@ -61,6 +61,6 @@ f.each do |line|
   end
 end
 
-File.open("#{options[:drug]}_word_freq_by_state.json","w") do |s|
+File.open("./data/#{options[:drug]}_word_freq_by_state.json","w") do |s|
   s.write(states.to_json)
 end
