@@ -3,6 +3,7 @@ require 'json'
 require 'optparse'
 require 'awesome_print'
 require 'set'
+require 'matrix'
 #Count occurence of words by categories of states, display a heatmap
 
 options  = {}
@@ -22,6 +23,7 @@ end
 optparse.parse!
 
 def jaccard(one,two) #Assume that both one and two are arrays
+	#Jaccard similarity of two sets is the ratio of the length of intersection to union of those two sets 
 	return (one.to_set & two.to_set).length/(one.length+two.length).to_f
 end
 
@@ -43,7 +45,7 @@ end
 
 #Should lemmatize and remove extraneous symbols
 
-similarity = Array.new(word_occurences_by_category.keys.length){Array.new(word_occurences_by_category.keys.length,0)}
+similarity = Array.new(word_occurences_by_category.keys.length){Array.new(word_occurences_by_category.keys.length,-1)}
 
 word_occurences_by_category.each_with_index do |words_one, i|
 	word_occurences_by_category.each_with_index do |words_two, j|
@@ -51,4 +53,7 @@ word_occurences_by_category.each_with_index do |words_one, i|
 	end
 end
 
-ap similarity
+#Write created hashes to file
+File.open('./data/word-occurences-by-category.json','w') do |f|
+	f.write(word_occurences_by_category.to_json)
+end
