@@ -2,9 +2,6 @@ require 'json'
 require 'optparse'
 require 'pp'
 
-#change SUBSTANCE in SUBSTANCE_geo.txt to be same as
-#SUBSTANCE in SUBSTANCE_all_out.txt
-
 options  = {}
 optparse = OptionParser.new do |opts|
      opts.banner = "Usage: ruby geo_separate.rb [options]"
@@ -22,10 +19,11 @@ end
 optparse.parse!
 
 
-File.open("#{options[:drug]}_geo.txt",'w') do |s|
-     f = File.readlines("#{options[:drug]}_all_out.txt")
+#DRUG_all_out txt contains tweets for a given drug from all locales
+File.open("./data/#{options[:drug]}_geo.txt",'w') do |s|
+     f = File.readlines("./data/#{options[:drug]}_all_out.txt")
      f.each do |obj|
-          if /country\"=>\"United States\"/.match(obj)
+          if /country\"=>\"United States\"/.match(obj) 
                a = obj.split(' : ')
                b = obj.split('"coordinates"=>[')
                c = obj.split('"full_name"=>"')
@@ -38,6 +36,8 @@ File.open("#{options[:drug]}_geo.txt",'w') do |s|
                          end
                          break if /\]/.match(i)     
                     end
+
+               #Could you comment this code and replace the magic constants that remain with descriptive variable names?
                spl = temp.split(', ')
                s.print d[1][0..-2] + " | " + spl[0] + "," + spl[1][0..-2]
                s.print " | "
