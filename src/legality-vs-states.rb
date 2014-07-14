@@ -54,6 +54,6 @@ word_occurences_by_category.each_with_index do |words_one, i|
 end
 
 #Write created hashes to file
-File.open('./data/word-occurences-by-category.json','w') do |f|
+File.open("./data/#{options[:drug]}-word-occurences-by-category.json",'w') do |f|
 	f.write(word_occurences_by_category.to_json)
 end

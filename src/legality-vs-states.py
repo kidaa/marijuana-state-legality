@@ -10,13 +10,16 @@ from matplotlib import rcParams
 rcParams['text.usetex'] = True
 
 READ = 'rU'
-data = json.load(open('./data/word-occurences-by-category.json',READ))
+data = json.load(open('./data/marijuana-word-occurences-by-category.json',READ))
 
 def jaccard(one,two):
+	print one,two
 	return len(set(one) & set(two))/float(len(set(one) | set(two)))
 
+print jaccard([1,2,3],[2,3,4])
+
 categories = ['legal','Medical','decriminalization','Medical-decriminalization','illegal']
-similarities = [[jaccard(first_category,second_category) for first_category in categories] 
+similarities = [[jaccard(data[first_category],data[second_category]) for first_category in categories] 
 														 for second_category in categories]
 
 np.savetxt('./results/jaccard-similarity-marijuana.tsv',np.array(similarities),fmt ='%.04f', delimiter='\t')
