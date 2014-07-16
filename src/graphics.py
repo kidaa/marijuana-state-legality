@@ -16,4 +16,4 @@ def adjust_spines(ax,spines=['bottom','left']):
 	else:
 		ax.xaxis.set_ticks([])
 
-format = lambda text: r'\Large \textbf{\textsc{%s}}'%text
+format = lambda text: r'\Large \textbf{\textsc{%s}}'%text.capitalize()

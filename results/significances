@@ -1,0 +1,10 @@
+legal vs Medical : 1.0000
+legal vs decriminalization : 1.0000
+legal vs Medical-decriminalization : 1.0000
+legal vs illegal : 0.6039
+Medical vs decriminalization : 0.9442
+Medical vs Medical-decriminalization : 0.7585
+Medical vs illegal : 0.6882
+decriminalization vs Medical-decriminalization : 0.8664
+decriminalization vs illegal : 0.9476
+Medical-decriminalization vs illegal : 0.6434
